@@ -3,7 +3,12 @@ import random
 
 def lotto():
     zahlen = list(range(1, 46))
-    ziehung = random.sample(zahlen, 6)
+    ziehung = []
+
+    for i in range(6):
+        z = random.randint(0, 44 - i)
+        ziehung.append(zahlen[z])
+        zahlen[z] = zahlen[44 - i]
     return sorted(ziehung)
 
 
