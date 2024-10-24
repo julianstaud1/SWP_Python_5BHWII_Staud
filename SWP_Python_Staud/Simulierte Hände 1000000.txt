@@ -1,0 +1,23 @@
+Simulierte Hände: 1000000
+
+Pair: 423027 (42.3027%)
+Two Pair: 47151 (4.7151%)
+Drilling: 21045 (2.1045%)
+Straight: 3549 (0.3549%)
+Flush: 1959 (0.1959%)
+Full House: 1375 (0.1375%)
+Vierling: 279 (0.0279%)
+Straight Flush: 14 (0.0014%)
+Royal Flush: 1 (0.0001%)
+ 
+Wahrscheinlichkeit Pair 43,83%
+Wahrscheinlichkeit Two Pair 4,75%
+Wahrscheinlichkeit Three of a Kind 2,11%
+Wahrscheinlichkeit Straight 0,392%
+Wahrscheinlichkeit Flush 0,197%
+Wahrscheinlichkeit Full House 0,144%
+Wahrscheinlichkeit Vierling 0,0240%
+Wahrscheinlichkeit Straight Flush 0,00139%
+Wahrscheinlichkeit Royal Flush 0,000154%
+
+Process finished with exit code 0
