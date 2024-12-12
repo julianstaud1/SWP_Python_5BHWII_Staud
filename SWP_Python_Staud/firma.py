@@ -1,9 +1,11 @@
 from typing import List, Dict
 
+
 class Person:
     def __init__(self, name: str, gender: str):
         self.name = name
         self.gender = gender  # "male" or "female"
+
 
 class Mitarbeiter(Person):
     def __init__(self, name: str, gender: str, abteilung):
@@ -11,12 +13,14 @@ class Mitarbeiter(Person):
         self.abteilung = abteilung
         abteilung.add_mitarbeiter(self)
 
+
 class Abteilungsleiter(Mitarbeiter):
     def __init__(self, name: str, gender: str, abteilung):
         super().__init__(name, gender, abteilung)
         if abteilung.leiter is not None:
             raise ValueError(f"Abteilung {abteilung.name} hat bereits einen Leiter.")
         abteilung.set_leiter(self)
+
 
 class Abteilung:
     def __init__(self, name: str):
@@ -32,6 +36,7 @@ class Abteilung:
 
     def get_mitarbeiter_anzahl(self):
         return len(self.mitarbeiter)
+
 
 class Firma:
     def __init__(self, name: str):
@@ -63,8 +68,9 @@ class Firma:
                 geschlechter_count[mitarbeiter.gender] += 1
         return {gender: (count / total_mitarbeiter) * 100 for gender, count in geschlechter_count.items()}
 
+
 # Erstellen einer Beispiel-Firma
-firma = Firma("TechCorp")
+firma = Firma("testfirma")
 
 # Abteilungen erstellen
 entwicklung = Abteilung("Entwicklung")
@@ -74,14 +80,15 @@ firma.add_abteilung(entwicklung)
 firma.add_abteilung(marketing)
 
 # Mitarbeiter und Leiter instanzieren
-leiter_entwicklung = Abteilungsleiter("Anna", "female", entwicklung)
+leiter_entwicklung = Abteilungsleiter("Graf Hugo", "male", entwicklung)
 leiter_marketing = Abteilungsleiter("Tom", "male", marketing)
 
-mitarbeiter1 = Mitarbeiter("Alice", "female", entwicklung)
-mitarbeiter2 = Mitarbeiter("Bob", "male", entwicklung)
+mitarbeiter1 = Mitarbeiter("Anna", "female", entwicklung)
+mitarbeiter2 = Mitarbeiter("Tom", "male", entwicklung)
 mitarbeiter3 = Mitarbeiter("Clara", "female", marketing)
 mitarbeiter4 = Mitarbeiter("Dave", "male", marketing)
 mitarbeiter5 = Mitarbeiter("Eva", "female", marketing)
+mitarbeiter6 = Mitarbeiter("Torben", "male", entwicklung)
 
 # Methoden testen
 print("Anzahl Mitarbeiter:", firma.mitarbeiter_anzahl())
