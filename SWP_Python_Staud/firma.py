@@ -28,10 +28,10 @@ class Abteilung:
         self.mitarbeiter: List[Mitarbeiter] = []
         self.leiter: Abteilungsleiter = None
 
-    def add_mitarbeiter(self, mitarbeiter: Mitarbeiter):
+    def add_mitarbeiter(self, mitarbeiter):
         self.mitarbeiter.append(mitarbeiter)
 
-    def set_leiter(self, leiter: Abteilungsleiter):
+    def set_leiter(self, leiter):
         self.leiter = leiter
 
     def get_mitarbeiter_anzahl(self):
@@ -69,30 +69,60 @@ class Firma:
         return {gender: (count / total_mitarbeiter) * 100 for gender, count in geschlechter_count.items()}
 
 
-# Erstellen einer Beispiel-Firma
-firma = Firma("testfirma")
+def main():
+    # Erstellen einer Beispiel-Firma
+    firma = Firma("Testfirma")
 
-# Abteilungen erstellen
-entwicklung = Abteilung("Entwicklung")
-marketing = Abteilung("Marketing")
+    # Abteilungen erstellen
+    entwicklung = Abteilung("Entwicklung")
+    marketing = Abteilung("Marketing")
 
-firma.add_abteilung(entwicklung)
-firma.add_abteilung(marketing)
+    firma.add_abteilung(entwicklung)
+    firma.add_abteilung(marketing)
 
-# Mitarbeiter und Leiter instanzieren
-leiter_entwicklung = Abteilungsleiter("Graf Hugo", "male", entwicklung)
-leiter_marketing = Abteilungsleiter("Tom", "male", marketing)
+    # Neuer Fehler und behebar
+    try:
+        leiter_entwicklung = Abteilungsleiter("Graf Hugo", "unknown", entwicklung)  # Falsches Geschlecht "unknown"
+    except ValueError as e:
+        print(f"Fehler behoben: {e}")
 
-mitarbeiter1 = Mitarbeiter("Anna", "female", entwicklung)
-mitarbeiter2 = Mitarbeiter("Tom", "male", entwicklung)
-mitarbeiter3 = Mitarbeiter("Clara", "female", marketing)
-mitarbeiter4 = Mitarbeiter("Dave", "male", marketing)
-mitarbeiter5 = Mitarbeiter("Eva", "female", marketing)
-mitarbeiter6 = Mitarbeiter("Torben", "male", entwicklung)
+    leiter_entwicklung = Abteilungsleiter("Graf Hugo", "male", entwicklung)
+    leiter_marketing = Abteilungsleiter("Tom", "male", marketing)
 
-# Methoden testen
-print("Anzahl Mitarbeiter:", firma.mitarbeiter_anzahl())
-print("Anzahl Abteilungsleiter:", firma.abteilungsleiter_anzahl())
-print("Anzahl Abteilungen:", firma.abteilung_anzahl())
-print("Größte Abteilung:", firma.groesste_abteilung().name)
-print("Geschlechterverteilung:", firma.geschlechter_prozent())
+    # Hochblubber-Fehler und behebar
+    try:
+        mitarbeiter1 = Mitarbeiter("Anna", "female", None)  # Abteilung ist None
+    except AttributeError as e:
+        print(f"Hochblubber-Fehler behoben: {e}")
+        mitarbeiter1 = Mitarbeiter("Anna", "female", entwicklung)
+
+    mitarbeiter2 = Mitarbeiter("Tom", "male", entwicklung)
+    mitarbeiter3 = Mitarbeiter("Clara", "female", marketing)
+    mitarbeiter4 = Mitarbeiter("Dave", "male", marketing)
+    mitarbeiter5 = Mitarbeiter("Eva", "female", marketing)
+    mitarbeiter6 = Mitarbeiter("Torben", "male", entwicklung)
+    mitarbeiter7 = Mitarbeiter("Angelina", "female", marketing)
+
+    # Neuer Fehler NICHT behebar
+    try:
+        leiter_marketing = Abteilungsleiter("Tom", "male", marketing)
+    except ValueError as e:
+        print(f"Unbehebbarer Fehler: {e}")
+
+    # Hochblubber-Fehler und NICHT behebar
+    try:
+        firma.add_abteilung("Nicht Abteilung")
+    except AttributeError as e:
+        print(f"Unbehebbarer Hochblubber-Fehler: {e}")
+
+    # Methoden testen
+    print("Anzahl Mitarbeiter:", firma.mitarbeiter_anzahl())
+    print("Anzahl Abteilungsleiter:", firma.abteilungsleiter_anzahl())
+    print("Anzahl Abteilungen:", firma.abteilung_anzahl())
+    groesste = firma.groesste_abteilung()
+    print("Größte Abteilung:", groesste.name if groesste else "Keine Abteilung")
+    print("Geschlechterverteilung:", firma.geschlechter_prozent())
+
+
+if __name__ == "__main__":
+    main()
